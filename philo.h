@@ -28,6 +28,6 @@ typedef struct s_philo
 	t_args		*args;
 } t_philo;
 
-void	ft_start_philo(char **argv, t_philo *philo);
+t_philo	*ft_start_philo(char **argv, int argc);
 int		ft_check_args(int argc, int argc, char **argv);
 #endif

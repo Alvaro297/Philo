@@ -73,12 +73,14 @@ static void		ft_start_philo_help(t_philo *philo, t_args *args)
 	}
 }
 
-void		ft_start_philo(char **argv, int argc, t_philo *philo)
+t_philo		*ft_start_philo(char **argv, int argc)
 {
+	t_philo	*philo;
 	t_args	args;
 	int		i;
 
 	i = 0;
+	philo = malloc(sizeof(philo) * ft_atoi(argv[1]));
 	args.forks = malloc(sizeof(pthread_mutex_t) * ft_atoi(argv[1]));
 	args.n_philos = ft_atoi(argv[1]);
 	args.time_to_die = ft_atoi(argv[2]);
@@ -95,6 +97,7 @@ void		ft_start_philo(char **argv, int argc, t_philo *philo)
 		philo[i].args = &args;
 		philo[i].n_times_eat = 0;
 		philo[i].last_meal_time = 0;
-		philo[i].is_fork = 0;
+		philo[i++].is_fork = 0;
 	}
+	return (philo);
 };
