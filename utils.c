@@ -76,3 +76,20 @@ t_philo		*ft_start_philo(char **argv, int argc)
 	}
 	return (philo);
 };
+
+void	ft_free_all(t_philo *philo, t_monitor *monitor)
+{
+	int		i;
+
+	i = 0;
+	while (i < philo->args->n_philos)
+		pthread_join(philo[i++].thread, NULL);
+	pthread_join(monitor.monitor, NULL);+
+	i = 0;
+	while (i < philo->args->n_philos)
+		pthread_mutex_destroy(&philo->args->forks[i++]);
+	pthread_mutex_destroy(&philo->args->monitor_lock);
+	pthread_mutex_destroy(&philo->args->print_lock);
+	free(philo->args->forks);
+	free(philo);
+}

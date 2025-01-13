@@ -1,14 +1,11 @@
 #include "philo.h"
 
-void	thinking(t_philo *philo)
+void	eating_help(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->args->print_lock);
-	printf("Philosopher %d is thinking\n", philo->id);
-	pthread_mutex_unlock(&philo->args->print_lock);
-	usleep(philo->args->time_to_sleep * 1000);
+	
 }
 
-void	eating(t_philo	*philo)
+void	eating(t_philo *philo)
 {
 	if (philo->left_fork == -1)
 		usleep(philo->args->time_to_die * 1000 + 1);
@@ -22,11 +19,11 @@ void	eating(t_philo	*philo)
 			pthread_mutex_unlock(&philo->args->monitor_lock);
 			pthread_mutex_unlock(&philo->args->forks[philo->right_fork]);
 			pthread_mutex_unlock(&philo->args->forks[philo->left_fork]);
-			return;
+			return ;
 		}
 		pthread_mutex_unlock(&philo->args->monitor_lock);
 		pthread_mutex_lock(&philo->args->print_lock);
-		printf("Philosopher %d is eating\n", philo->id);
+		printf(YELLOW "Philosopher %d is eating\n" RESET, philo->id);
 		pthread_mutex_unlock(&philo->args->print_lock);
 		gettimeofday(&philo->last_meal_time, NULL);
 		usleep(philo->args->time_to_eat * 1000);
@@ -39,7 +36,15 @@ void	eating(t_philo	*philo)
 void	sleeping(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->args->print_lock);
-	printf("Philosopher %d is sleeping\n", philo->id);
+	printf(BLUE "Philosopher %d is sleeping\n" RESET, philo->id);
 	pthread_mutex_unlock(&philo->args->print_lock);
 	usleep(philo->args->time_to_sleep);
+}
+
+void	thinking(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->args->print_lock);
+	printf("Philosopher %d is thinking\n", philo->id);
+	pthread_mutex_unlock(&philo->args->print_lock);
+	usleep(philo->args->time_to_sleep * 1000);
 }

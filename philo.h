@@ -7,6 +7,11 @@
 #include <unistd.h>
 #include <sys/time.h>
 
+#define RED		"\033[31m"
+#define YELLOW	"\033[33m"
+#define BLUE	"\033[34m"
+#define RESET	"\033[0m"
+
 typedef struct s_args
 {
 	int				n_philos;
@@ -41,7 +46,8 @@ typedef struct s_monitor
 
 t_philo	*ft_start_philo(char **argv, int argc);
 int		ft_check_args(int argc, char **argv);
-void	ft_monitoring(void *monitor_void);
+void	ft_free_all(t_philo *philo, t_monitor *monitor);
+void	*ft_monitoring(void *monitor_void);
 void	thinking(t_philo *philo);
 void	eating(t_philo	*philo);
 void	sleeping(t_philo *philo);
