@@ -1,11 +1,11 @@
 NAME = philo
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra -fsanitize=thread -g
+CFLAGS = -Wall -Werror -Wextra -fsanitize=thread
 SRCS =	main.c \
 		monitor.c \
 		utils.c \
 		routine_utils.c \
-		validations
+		validations.c
 OBJS = $(SRCS:.c=.o)
 RM = rm -f
 

@@ -1,10 +1,5 @@
 #include "philo.h"
 
-void	eating_help(t_philo *philo)
-{
-	
-}
-
 void	eating(t_philo *philo)
 {
 	if (philo->left_fork == -1)

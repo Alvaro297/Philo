@@ -46,7 +46,7 @@ void	*ft_monitoring(void *monitor_void)
 	while (1)
 	{
 		i = 0;
-		gettimeofday(current_time, NULL);
+		gettimeofday(&current_time, NULL);
 		while (i < monitor->args->n_philos)
 		{
 			if (ft_die_philo(monitor, monitor->philos[i], current_time, i) == 1)

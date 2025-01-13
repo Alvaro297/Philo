@@ -1,6 +1,5 @@
 #include "philo.h"
 
-
 static int	isnumber(char *nbr)
 {
 	int		i;
@@ -24,9 +23,9 @@ int		ft_check_args(int argc, char **argv)
 		return (1);
 	while (i < argc)
 	{
-		if (i == 1 && argv[i] == '0')
+		if (ft_atoi(argv[1]) == 0)
 			return (EXIT_FAILURE);
-		if (!is_number(argv[i]))
+		if (!isnumber(argv[i]))
 			return (1);
 		i++;
 	}

@@ -43,7 +43,7 @@ typedef struct s_monitor
 	t_philo		**philos;
 }	t_monitor;
 
-
+int		ft_atoi(char *nbr);
 t_philo	*ft_start_philo(char **argv, int argc);
 int		ft_check_args(int argc, char **argv);
 void	ft_free_all(t_philo *philo, t_monitor *monitor);
