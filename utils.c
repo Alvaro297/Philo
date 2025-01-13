@@ -66,7 +66,7 @@ t_philo		*ft_start_philo(char **argv, int argc)
 		philo[i].n_times_eat = 0;
 		gettimeofday(philo[i].last_meal_time, NULL);
 		philo[i].right_fork = i;
-		if (argc == 1)
+		if (args.n_philos == 1)
 			philo[i].left_fork = -1;
 		else if (i == 1)
 			philo[i].left_fork = args.n_philos;

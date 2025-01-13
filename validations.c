@@ -24,7 +24,9 @@ int		ft_check_args(int argc, char **argv)
 		return (1);
 	while (i < argc)
 	{
-		if (!is_number(argc[i]))
+		if (i == 1 && argv[i] == '0')
+			return (EXIT_FAILURE);
+		if (!is_number(argv[i]))
 			return (1);
 		i++;
 	}

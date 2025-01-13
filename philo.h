@@ -40,7 +40,7 @@ typedef struct s_monitor
 
 
 t_philo	*ft_start_philo(char **argv, int argc);
-int		ft_check_args(int argc, int argc, char **argv);
+int		ft_check_args(int argc, char **argv);
 void	ft_monitoring(void *monitor_void);
 void	thinking(t_philo *philo);
 void	eating(t_philo	*philo);

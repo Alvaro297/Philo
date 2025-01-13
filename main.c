@@ -10,6 +10,13 @@ void	routine(void *philo_void)
 		usleep(5000);
 	while (1)
 	{
+		pthread_mutex_lock(&args->monitor_lock);
+		if (args->stop_simulating)
+		{
+			pthread_mutex_unlock(&args->monitor_lock);
+			break;
+		}
+		pthread_mutex_unlock(&args->monitor_lock);
 		thinking(philo);
 		eating(philo);
 		sleeping(philo);
@@ -26,7 +33,7 @@ static void	philo(int argc, char **argv)
 	philo = ft_start_philo(argv, argc, philo);
 	monitor.args = philo->args;
 	monitor.philos = &philo;
-	if (pthread_create(&monitor.monitor, NULL, ft_monitoring, (void *)&monitor);)
+	if (pthread_create(&monitor.monitor, NULL, ft_monitoring, (void *)&monitor))
 	{
 		perror("Fallo en la creacion");
 		return (EXIT_FAILURE);
