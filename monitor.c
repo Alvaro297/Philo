@@ -7,7 +7,7 @@ static int	ft_all_eating(t_monitor *monitor)
 	i = 0;
 	while (i < monitor->args->n_philos)
 	{
-		if (monitor->philos[i]->n_times_eat < monitor->args->number_eat)
+		if (monitor->args->number_eat == -1 || monitor->philos[i].n_times_eat < monitor->args->number_eat)
 			return (0);
 		i++;
 	}
@@ -17,12 +17,12 @@ static int	ft_all_eating(t_monitor *monitor)
 	return (1);
 }
 
-static int	ft_die_philo(t_monitor *monitor, t_philo *philo, struct timeval current_time, int i)
+static int	ft_die_philo(t_monitor *monitor, t_philo *philo, struct timeval current_time)
 {
 	long time_diff;
 
-	time_diff = (current_time.tv_sec - monitor->philos[i]->last_meal_time.tv_sec) * 1000;
-	time_diff += (current_time.tv_usec - monitor->philos[i]->last_meal_time.tv_usec) / 1000;
+	time_diff = (current_time.tv_sec - philo->last_meal_time.tv_sec) * 1000;
+	time_diff += (current_time.tv_usec - philo->last_meal_time.tv_usec) / 1000;
 	if (time_diff > monitor->args->time_to_die)
 	{
 		pthread_mutex_lock(&monitor->args->monitor_lock);
@@ -49,7 +49,7 @@ void	*ft_monitoring(void *monitor_void)
 		gettimeofday(&current_time, NULL);
 		while (i < monitor->args->n_philos)
 		{
-			if (ft_die_philo(monitor, monitor->philos[i], current_time, i) == 1)
+			if (ft_die_philo(monitor, &monitor->philos[i], current_time) == 1)
 				return (NULL);
 			i++;
 		}

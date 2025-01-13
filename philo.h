@@ -40,7 +40,7 @@ typedef struct s_monitor
 {
 	pthread_t	monitor;
 	t_args		*args;
-	t_philo		**philos;
+	t_philo		*philos;
 }	t_monitor;
 
 int		ft_atoi(char *nbr);

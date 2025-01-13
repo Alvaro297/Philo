@@ -32,7 +32,7 @@ static void	philo(int argc, char **argv)
 	i = 0;
 	philo = ft_start_philo(argv, argc);
 	monitor.args = philo->args;
-	monitor.philos = &philo;
+	monitor.philos = philo;
 	if (pthread_create(&monitor.monitor, NULL, ft_monitoring, &monitor))
 	{
 		perror("Fallo en la creacion");
