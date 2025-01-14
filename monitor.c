@@ -7,8 +7,13 @@ static int	ft_all_eating(t_monitor *monitor)
 	i = 0;
 	while (i < monitor->args->n_philos)
 	{
+		pthread_mutex_lock(&monitor->philos[i].last_meal_time_mutex);
 		if (monitor->args->number_eat == -1 || monitor->philos[i].n_times_eat < monitor->args->number_eat)
+		{
+			pthread_mutex_unlock(&monitor->philos[i].last_meal_time_mutex);
 			return (0);
+		}
+		pthread_mutex_unlock(&monitor->philos[i].last_meal_time_mutex);
 		i++;
 	}
 	pthread_mutex_lock(&monitor->args->monitor_lock);

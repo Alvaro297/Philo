@@ -3,13 +3,9 @@
 static void	print_forks(t_philo	*philo)
 {
 	if (philo->left_fork < philo->right_fork)
-	{
 		eating_case1(philo);
-	}
 	else
-	{
 		eating_case2(philo);
-	}
 }
 
 static void	eating_help(t_philo	*philo)
@@ -19,9 +15,9 @@ static void	eating_help(t_philo	*philo)
 	pthread_mutex_unlock(&philo->args->print_lock);
 	pthread_mutex_lock(&philo->last_meal_time_mutex);
 	gettimeofday(&philo->last_meal_time, NULL);
+	philo->n_times_eat++;
 	pthread_mutex_unlock(&philo->last_meal_time_mutex);
 	usleep(philo->args->time_to_eat * 1000);
-	philo->n_times_eat++;
 	pthread_mutex_unlock(&philo->args->forks[philo->right_fork]);
 	pthread_mutex_unlock(&philo->args->forks[philo->left_fork]);
 }
@@ -38,8 +34,6 @@ void	eating(t_philo *philo)
 			&& philo->args->number_eat != -1) || philo->args->stop_simulating)
 		{
 			pthread_mutex_unlock(&philo->args->monitor_lock);
-			pthread_mutex_unlock(&philo->args->forks[philo->right_fork]);
-			pthread_mutex_unlock(&philo->args->forks[philo->left_fork]);
 			return ;
 		}
 		pthread_mutex_unlock(&philo->args->monitor_lock);
