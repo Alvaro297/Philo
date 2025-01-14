@@ -5,7 +5,8 @@ SRCS =	main.c \
 		monitor.c \
 		utils.c \
 		routine_utils.c \
-		validations.c
+		validations.c \
+		eating_cases.c
 OBJS = $(SRCS:.c=.o)
 RM = rm -f
 

@@ -10,6 +10,7 @@
 #define RED		"\033[31m"
 #define YELLOW	"\033[33m"
 #define BLUE	"\033[34m"
+#define GREEN	"\033[32m"
 #define RESET	"\033[0m"
 
 typedef struct s_args
@@ -51,5 +52,7 @@ void	ft_free_all(t_philo *philo, t_monitor *monitor);
 void	*ft_monitoring(void *monitor_void);
 void	thinking(t_philo *philo);
 void	eating(t_philo	*philo);
+void	eating_case1(t_philo *philo);
+void	eating_case2(t_philo *philo);
 void	sleeping(t_philo *philo);
 #endif
