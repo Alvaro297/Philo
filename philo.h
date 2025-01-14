@@ -31,6 +31,7 @@ typedef struct s_philo
 	pthread_t			thread;
 	int					n_times_eat;
 	struct timeval		last_meal_time;
+	pthread_mutex_t		last_meal_time_mutex;
 	int					right_fork;
 	int					left_fork;
 	t_args				*args;

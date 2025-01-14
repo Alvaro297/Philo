@@ -1,6 +1,6 @@
 NAME = philo
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra -fsanitize=thread
+CFLAGS = -Wall -Wextra -Werror -pthread -g
 SRCS =	main.c \
 		monitor.c \
 		utils.c \
@@ -24,9 +24,6 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
 
-%.o: %.c
-	@printf "%-100s\r" ">Philo compiling: $(CC) $(CFLAGS) -c -o $@ $<"
-	@$(CC) $(CFLAGS) -c -o $@ $<
 
 clean:
 	@$(RM) $(OBJS)

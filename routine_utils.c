@@ -1,15 +1,35 @@
 #include "philo.h"
 
+static void	eating_help(t_philo	*philo)
+{
+	pthread_mutex_lock(&philo->args->print_lock);
+	printf(YELLOW "Philosopher %d is eating\n" RESET, philo->id);
+	pthread_mutex_unlock(&philo->args->print_lock);
+	pthread_mutex_lock(&philo->last_meal_time_mutex);
+	gettimeofday(&philo->last_meal_time, NULL);
+	pthread_mutex_unlock(&philo->last_meal_time_mutex);
+	usleep(philo->args->time_to_eat * 1000);
+	philo->n_times_eat++;
+	pthread_mutex_unlock(&philo->args->forks[philo->right_fork]);
+	pthread_mutex_unlock(&philo->args->forks[philo->left_fork]);
+}
+
 void	eating(t_philo *philo)
 {
 	if (philo->left_fork == -1)
 		usleep(philo->args->time_to_die * 1000 + 1);
 	else
 	{
-		pthread_mutex_lock(&philo->args->forks[philo->left_fork]);
-		pthread_mutex_lock(&philo->args->forks[philo->right_fork]);
+		if (philo->left_fork < philo->right_fork) {
+			pthread_mutex_lock(&philo->args->forks[philo->left_fork]);
+			pthread_mutex_lock(&philo->args->forks[philo->right_fork]);
+		} else {
+			pthread_mutex_lock(&philo->args->forks[philo->right_fork]);
+			pthread_mutex_lock(&philo->args->forks[philo->left_fork]);
+		}
 		pthread_mutex_lock(&philo->args->monitor_lock);
-		if (philo->n_times_eat >= philo->args->number_eat)
+		if ((philo->n_times_eat >= philo->args->number_eat
+			&& philo->args->number_eat != -1) || philo->args->stop_simulating)
 		{
 			pthread_mutex_unlock(&philo->args->monitor_lock);
 			pthread_mutex_unlock(&philo->args->forks[philo->right_fork]);
@@ -17,29 +37,36 @@ void	eating(t_philo *philo)
 			return ;
 		}
 		pthread_mutex_unlock(&philo->args->monitor_lock);
-		pthread_mutex_lock(&philo->args->print_lock);
-		printf(YELLOW "Philosopher %d is eating\n" RESET, philo->id);
-		pthread_mutex_unlock(&philo->args->print_lock);
-		gettimeofday(&philo->last_meal_time, NULL);
-		usleep(philo->args->time_to_eat * 1000);
-		philo->n_times_eat++;
-		pthread_mutex_unlock(&philo->args->forks[philo->right_fork]);
-		pthread_mutex_unlock(&philo->args->forks[philo->left_fork]);
+		eating_help(philo);
 	}
 }
 
 void	sleeping(t_philo *philo)
 {
+	pthread_mutex_lock(&philo->args->monitor_lock);
+	if (philo->args->stop_simulating)
+	{
+		pthread_mutex_unlock(&philo->args->monitor_lock);
+		return;
+	}
+	pthread_mutex_unlock(&philo->args->monitor_lock);
 	pthread_mutex_lock(&philo->args->print_lock);
 	printf(BLUE "Philosopher %d is sleeping\n" RESET, philo->id);
 	pthread_mutex_unlock(&philo->args->print_lock);
-	usleep(philo->args->time_to_sleep);
+	usleep(philo->args->time_to_sleep * 1000);
 }
 
 void	thinking(t_philo *philo)
 {
+	pthread_mutex_lock(&philo->args->monitor_lock);
+	if (philo->args->stop_simulating)
+	{
+		pthread_mutex_unlock(&philo->args->monitor_lock);
+		return;
+	}
+	pthread_mutex_unlock(&philo->args->monitor_lock);
 	pthread_mutex_lock(&philo->args->print_lock);
 	printf("Philosopher %d is thinking\n", philo->id);
 	pthread_mutex_unlock(&philo->args->print_lock);
-	usleep(philo->args->time_to_sleep * 1000);
+	usleep(1000);
 }

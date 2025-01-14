@@ -6,7 +6,7 @@ static void	*routine(void *philo_void)
 
 	philo = (t_philo *)philo_void;
 	if (philo->id % 2 == 0)
-		usleep(5000);
+		usleep(1000);
 	while (1)
 	{
 		pthread_mutex_lock(&philo->args->monitor_lock);
@@ -40,7 +40,11 @@ static void	philo(int argc, char **argv)
 	}
 	while (i < philo->args->n_philos)
 	{
-		pthread_create(&philo[i].thread, NULL, routine, &philo[i]);
+		if (pthread_create(&philo[i].thread, NULL, routine, &philo[i]))
+		{
+			perror("Fallo en la creacion");
+			return ;
+		}
 		i++;
 	}
 	ft_free_all(philo, &monitor);
