@@ -2,17 +2,6 @@
 	📖 Philosophers
 </h1>
 
-<p align="center">
-	<b><i>Basics of process threading, and how work on the same memory space.</i></b><br>
-</p>
-
-<p align="center">
-	<img alt="Number of lines of code" src="https://img.shields.io/tokei/lines/github/Alvaro297/Philo?color=critical" />
-	<img alt="Code language count" src="https://img.shields.io/github/languages/count/Alvaro297/Philo?color=yellow" />
-	<img alt="GitHub top language" src="https://img.shields.io/github/languages/top/Alvaro297/Philo?color=blue" />
-	<img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/Alvaro297/Philo?color=green" />
-</p>
-
 ---
 
 Philosophers an individual project at [42](https://www.42.fr/42-network/) about introduction to the basics of process threading, and how work on the same memory space.
