@@ -22,13 +22,16 @@ static void	print_forks(t_philo	*philo)
 
 static void	eating_help(t_philo	*philo)
 {
-	pthread_mutex_lock(&philo->args->print_lock);
-	printf(GREEN "Philosopher %d is eating\n" RESET, philo->id);
-	pthread_mutex_unlock(&philo->args->print_lock);
+	long	milisec;
+
 	pthread_mutex_lock(&philo->last_meal_time_mutex);
 	gettimeofday(&philo->last_meal_time, NULL);
 	philo->n_times_eat++;
 	pthread_mutex_unlock(&philo->last_meal_time_mutex);
+	pthread_mutex_lock(&philo->args->print_lock);
+	milisec = get_milliseconds();
+	printf(GREEN "timestamp in ms %ld Philosopher %d is eating\n" RESET, milisec, philo->id);
+	pthread_mutex_unlock(&philo->args->print_lock);
 	usleep(philo->args->time_to_eat * 1000);
 	pthread_mutex_unlock(&philo->args->forks[philo->right_fork]);
 	pthread_mutex_unlock(&philo->args->forks[philo->left_fork]);
@@ -56,6 +59,8 @@ void	eating(t_philo *philo)
 
 void	sleeping(t_philo *philo)
 {
+	long	milisec;
+
 	pthread_mutex_lock(&philo->args->monitor_lock);
 	if (philo->args->stop_simulating)
 	{
@@ -64,13 +69,16 @@ void	sleeping(t_philo *philo)
 	}
 	pthread_mutex_unlock(&philo->args->monitor_lock);
 	pthread_mutex_lock(&philo->args->print_lock);
-	printf(BLUE "Philosopher %d is sleeping\n" RESET, philo->id);
+	milisec = get_milliseconds();
+	printf(BLUE "timestamp in ms %ld Philosopher %d is sleeping\n" RESET, milisec, philo->id);
 	pthread_mutex_unlock(&philo->args->print_lock);
 	usleep(philo->args->time_to_sleep * 1000);
 }
 
 void	thinking(t_philo *philo)
 {
+	long	milisec;
+
 	pthread_mutex_lock(&philo->args->monitor_lock);
 	if (philo->args->stop_simulating)
 	{
@@ -79,7 +87,8 @@ void	thinking(t_philo *philo)
 	}
 	pthread_mutex_unlock(&philo->args->monitor_lock);
 	pthread_mutex_lock(&philo->args->print_lock);
-	printf("Philosopher %d is thinking\n", philo->id);
+	milisec = get_milliseconds();
+	printf("timestamp in ms %ld Philosopher %d is thinking\n", milisec, philo->id);
 	pthread_mutex_unlock(&philo->args->print_lock);
 	usleep(1000);
 }

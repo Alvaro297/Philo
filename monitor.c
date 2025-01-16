@@ -39,6 +39,7 @@ static int	ft_die_philo(t_monitor *monitor, t_philo *philo,
 	struct timeval current_time)
 {
 	long	time_diff;
+	long	milisec;
 
 	pthread_mutex_lock(&philo->last_meal_time_mutex);
 	time_diff = (current_time.tv_sec - philo->last_meal_time.tv_sec) * 1000;
@@ -50,7 +51,8 @@ static int	ft_die_philo(t_monitor *monitor, t_philo *philo,
 		monitor->args->stop_simulating = 1;
 		pthread_mutex_unlock(&monitor->args->monitor_lock);
 		pthread_mutex_lock(&monitor->args->print_lock);
-		printf(RED "Philosopher %d has died\n" RESET, philo->id);
+		milisec = get_milliseconds();
+		printf(RED "timestamp in ms %ld Philosopher %d has died\n" RESET, milisec, philo->id);
 		pthread_mutex_unlock(&monitor->args->print_lock);
 		return (1);
 	}

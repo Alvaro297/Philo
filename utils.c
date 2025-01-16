@@ -12,6 +12,15 @@
 
 #include "philo.h"
 
+long	get_milliseconds(void)
+{
+	struct timeval	tv;
+	long			milliseconds;
+	gettimeofday(&tv, NULL);
+	milliseconds = tv.tv_sec * 1000 + tv.tv_usec / 1000;
+	return (milliseconds);
+}
+
 int	ft_atoi(char *nbr)
 {
 	int		result;

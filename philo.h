@@ -67,4 +67,5 @@ void	eating(t_philo	*philo);
 void	eating_case1(t_philo *philo);
 void	eating_case2(t_philo *philo);
 void	sleeping(t_philo *philo);
+long	get_milliseconds(void);
 #endif
