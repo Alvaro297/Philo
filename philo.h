@@ -1,17 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alvamart <alvamart@student.42madrid.com>   #+#  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025-01-16 12:41:46 by alvamart          #+#    #+#             */
+/*   Updated: 2025-01-16 12:41:46 by alvamart         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PHILO_H
 # define PHILO_H
 
-#include <pthread.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/time.h>
+# include <pthread.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <sys/time.h>
 
-#define RED		"\033[31m"
-#define YELLOW	"\033[33m"
-#define BLUE	"\033[34m"
-#define GREEN	"\033[32m"
-#define RESET	"\033[0m"
+# define RED		"\033[31m"
+# define YELLOW	"\033[33m"
+# define BLUE	"\033[34m"
+# define GREEN	"\033[32m"
+# define RESET	"\033[0m"
 
 typedef struct s_args
 {

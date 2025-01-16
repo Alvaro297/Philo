@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alvamart <alvamart@student.42madrid.com>   #+#  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025-01-16 12:39:10 by alvamart          #+#    #+#             */
+/*   Updated: 2025-01-16 12:39:10 by alvamart         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 int	ft_atoi(char *nbr)
@@ -50,7 +62,7 @@ static void	ft_start_philo_help(t_args *args, char **argv, int argc)
 		perror("Failed to initialize print_lock mutex");
 }
 
-t_philo		*ft_start_philo(char **argv, int argc)
+t_philo	*ft_start_philo(char **argv, int argc)
 {
 	t_philo	*philo;
 	t_args	*args;
@@ -60,7 +72,8 @@ t_philo		*ft_start_philo(char **argv, int argc)
 	args = malloc(sizeof(t_args));
 	ft_start_philo_help(args, argv, argc);
 	philo = malloc(sizeof(t_philo) * args->n_philos);
-	 while (i < args->n_philos) {
+	while (i < args->n_philos)
+	{
 		philo[i].id = i + 1;
 		philo[i].n_times_eat = 0;
 		gettimeofday(&philo[i].last_meal_time, NULL);
@@ -73,11 +86,10 @@ t_philo		*ft_start_philo(char **argv, int argc)
 			philo[i].left_fork = i - 1;
 		if (pthread_mutex_init(&philo[i].last_meal_time_mutex, NULL) != 0)
 			perror("Failed to initialize mutex");
-		philo[i].args = args;
-		i++;
+		philo[i++].args = args;
 	}
 	return (philo);
-};
+}
 
 void	ft_free_all(t_philo *philo, t_monitor *monitor)
 {

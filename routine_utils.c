@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   routine_utils.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alvamart <alvamart@student.42madrid.com>   #+#  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025-01-16 12:41:04 by alvamart          #+#    #+#             */
+/*   Updated: 2025-01-16 12:41:04 by alvamart         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 static void	print_forks(t_philo	*philo)
@@ -31,7 +43,8 @@ void	eating(t_philo *philo)
 		print_forks(philo);
 		pthread_mutex_lock(&philo->args->monitor_lock);
 		if ((philo->n_times_eat >= philo->args->number_eat
-			&& philo->args->number_eat != -1) || philo->args->stop_simulating)
+				&& philo->args->number_eat != -1)
+			|| philo->args->stop_simulating)
 		{
 			pthread_mutex_unlock(&philo->args->monitor_lock);
 			return ;
@@ -47,7 +60,7 @@ void	sleeping(t_philo *philo)
 	if (philo->args->stop_simulating)
 	{
 		pthread_mutex_unlock(&philo->args->monitor_lock);
-		return;
+		return ;
 	}
 	pthread_mutex_unlock(&philo->args->monitor_lock);
 	pthread_mutex_lock(&philo->args->print_lock);
@@ -62,7 +75,7 @@ void	thinking(t_philo *philo)
 	if (philo->args->stop_simulating)
 	{
 		pthread_mutex_unlock(&philo->args->monitor_lock);
-		return;
+		return ;
 	}
 	pthread_mutex_unlock(&philo->args->monitor_lock);
 	pthread_mutex_lock(&philo->args->print_lock);

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   monitor.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alvamart <alvamart@student.42madrid.com>   #+#  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025-01-16 12:42:45 by alvamart          #+#    #+#             */
+/*   Updated: 2025-01-16 12:42:45 by alvamart         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 static int	ft_all_eating(t_monitor *monitor)
@@ -8,7 +20,8 @@ static int	ft_all_eating(t_monitor *monitor)
 	while (i < monitor->args->n_philos)
 	{
 		pthread_mutex_lock(&monitor->philos[i].last_meal_time_mutex);
-		if (monitor->args->number_eat == -1 || monitor->philos[i].n_times_eat < monitor->args->number_eat)
+		if (monitor->args->number_eat == -1
+			|| monitor->philos[i].n_times_eat < monitor->args->number_eat)
 		{
 			pthread_mutex_unlock(&monitor->philos[i].last_meal_time_mutex);
 			return (0);
@@ -22,9 +35,10 @@ static int	ft_all_eating(t_monitor *monitor)
 	return (1);
 }
 
-static int	ft_die_philo(t_monitor *monitor, t_philo *philo, struct timeval current_time)
+static int	ft_die_philo(t_monitor *monitor, t_philo *philo,
+	struct timeval current_time)
 {
-	long time_diff;
+	long	time_diff;
 
 	pthread_mutex_lock(&philo->last_meal_time_mutex);
 	time_diff = (current_time.tv_sec - philo->last_meal_time.tv_sec) * 1000;
@@ -45,9 +59,9 @@ static int	ft_die_philo(t_monitor *monitor, t_philo *philo, struct timeval curre
 
 void	*ft_monitoring(void *monitor_void)
 {
-	t_monitor	*monitor;
-	struct timeval current_time;
-	int		i;
+	t_monitor		*monitor;
+	struct timeval	current_time;
+	int				i;
 
 	monitor = (t_monitor *)monitor_void;
 	while (1)

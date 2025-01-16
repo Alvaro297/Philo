@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alvamart <alvamart@student.42madrid.com>   #+#  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025-01-16 12:43:05 by alvamart          #+#    #+#             */
+/*   Updated: 2025-01-16 12:43:05 by alvamart         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 static void	*routine(void *philo_void)
@@ -13,7 +25,7 @@ static void	*routine(void *philo_void)
 		if (philo->args->stop_simulating)
 		{
 			pthread_mutex_unlock(&philo->args->monitor_lock);
-			break;
+			break ;
 		}
 		pthread_mutex_unlock(&philo->args->monitor_lock);
 		thinking(philo);
@@ -28,7 +40,7 @@ static void	philo(int argc, char **argv)
 	t_philo		*philo;
 	t_monitor	monitor;
 	int			i;
-	
+
 	i = 0;
 	philo = ft_start_philo(argv, argc);
 	monitor.args = philo->args;

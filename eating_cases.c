@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   eating_cases.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alvamart <alvamart@student.42madrid.com>   #+#  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025-01-16 12:43:32 by alvamart          #+#    #+#             */
+/*   Updated: 2025-01-16 12:43:32 by alvamart         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 void	eating_case1(t_philo *philo)
@@ -37,7 +49,7 @@ void	eating_case2(t_philo *philo)
 	{
 		pthread_mutex_unlock(&philo->args->monitor_lock);
 		pthread_mutex_unlock(&philo->args->forks[philo->right_fork]);
-		return;
+		return ;
 	}
 	pthread_mutex_unlock(&philo->args->monitor_lock);
 	pthread_mutex_lock(&philo->args->print_lock);
@@ -50,7 +62,7 @@ void	eating_case2(t_philo *philo)
 		pthread_mutex_unlock(&philo->args->monitor_lock);
 		pthread_mutex_unlock(&philo->args->forks[philo->left_fork]);
 		pthread_mutex_unlock(&philo->args->forks[philo->right_fork]);
-		return;
+		return ;
 	}
 	pthread_mutex_unlock(&philo->args->monitor_lock);
 	pthread_mutex_lock(&philo->args->print_lock);
