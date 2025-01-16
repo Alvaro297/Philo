@@ -30,7 +30,8 @@ static void	eating_help(t_philo	*philo)
 	pthread_mutex_unlock(&philo->last_meal_time_mutex);
 	pthread_mutex_lock(&philo->args->print_lock);
 	milisec = get_milliseconds();
-	printf(GREEN "timestamp in ms %ld Philosopher %d is eating\n" RESET, milisec, philo->id);
+	printf(GREEN "timestamp_in_ms %ld Philosopher %d is eating\n" RESET,
+		milisec, philo->id);
 	pthread_mutex_unlock(&philo->args->print_lock);
 	usleep(philo->args->time_to_eat * 1000);
 	pthread_mutex_unlock(&philo->args->forks[philo->right_fork]);
@@ -70,7 +71,8 @@ void	sleeping(t_philo *philo)
 	pthread_mutex_unlock(&philo->args->monitor_lock);
 	pthread_mutex_lock(&philo->args->print_lock);
 	milisec = get_milliseconds();
-	printf(BLUE "timestamp in ms %ld Philosopher %d is sleeping\n" RESET, milisec, philo->id);
+	printf(BLUE "timestamp_in_ms %ld Philosopher %d is sleeping\n" RESET,
+		milisec, philo->id);
 	pthread_mutex_unlock(&philo->args->print_lock);
 	usleep(philo->args->time_to_sleep * 1000);
 }
@@ -88,7 +90,8 @@ void	thinking(t_philo *philo)
 	pthread_mutex_unlock(&philo->args->monitor_lock);
 	pthread_mutex_lock(&philo->args->print_lock);
 	milisec = get_milliseconds();
-	printf("timestamp in ms %ld Philosopher %d is thinking\n", milisec, philo->id);
+	printf("timestamp_in_ms %ld Philosopher %d is thinking\n",
+		milisec, philo->id);
 	pthread_mutex_unlock(&philo->args->print_lock);
-	usleep(1000);
+	usleep(500);
 }

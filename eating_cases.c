@@ -18,7 +18,8 @@ static void	take_fork(t_philo *philo)
 
 	pthread_mutex_lock(&philo->args->print_lock);
 	milisec = get_milliseconds();
-	printf(YELLOW "timestamp in ms %ld Philosopher %d has taken a fork\n" RESET, milisec, philo->id);
+	printf(YELLOW "timestamp_in_ms %ld Philosopher %d has taken a fork\n" RESET,
+		milisec, philo->id);
 	pthread_mutex_unlock(&philo->args->print_lock);
 }
 
