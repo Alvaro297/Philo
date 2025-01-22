@@ -46,17 +46,11 @@ static void	philo(int argc, char **argv)
 	monitor.args = philo->args;
 	monitor.philos = philo;
 	if (pthread_create(&monitor.monitor, NULL, ft_monitoring, &monitor))
-	{
-		perror("Fallo en la creacion");
 		return ;
-	}
 	while (i < philo->args->n_philos)
 	{
 		if (pthread_create(&philo[i].thread, NULL, routine, &philo[i]))
-		{
-			perror("Fallo en la creacion");
 			return ;
-		}
 		i++;
 	}
 	ft_free_all(philo, &monitor);
