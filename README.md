@@ -2,6 +2,9 @@
 	📖 Philosophers
 </h1>
 
+<p align="center">
+  <img src="./philosophersn.png" alt="Philosophers 42 project badge"/>
+</p>
 ---
 
 Philosophers an individual project at [42](https://www.42.fr/42-network/) about introduction to the basics of process threading, and how work on the same memory space.
