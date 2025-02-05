@@ -52,7 +52,7 @@ static int	ft_die_philo(t_monitor *monitor, t_philo *philo,
 		pthread_mutex_unlock(&monitor->args->monitor_lock);
 		pthread_mutex_lock(&monitor->args->print_lock);
 		milisec = get_milliseconds();
-		printf(RED "%ld Philosopher %d has died\n" RESET,
+		printf(RED "timestamp_in_ms %ld Philosopher %d has died\n" RESET,
 			milisec, philo->id);
 		pthread_mutex_unlock(&monitor->args->print_lock);
 		return (1);

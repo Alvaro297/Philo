@@ -63,13 +63,13 @@ static void	ft_start_philo_help(t_args *args, char **argv, int argc)
 	while (i < args->n_philos)
 	{
 		if (pthread_mutex_init(&args->forks[i], NULL) != 0)
-			return (NULL);
+			perror("Failed to initialize mutex");
 		i++;
 	}
 	if (pthread_mutex_init(&args->monitor_lock, NULL) != 0)
-		return (NULL);
+		perror("Failed to initialize monitor_lock mutex");
 	if (pthread_mutex_init(&args->print_lock, NULL) != 0)
-		return (NULL);
+		perror("Failed to initialize print_lock mutex");
 }
 
 t_philo	*ft_start_philo(char **argv, int argc)
@@ -95,7 +95,7 @@ t_philo	*ft_start_philo(char **argv, int argc)
 		else
 			philo[i].left_fork = i - 1;
 		if (pthread_mutex_init(&philo[i].last_meal_time_mutex, NULL) != 0)
-			return (NULL);
+			perror("Failed to initialize mutex");
 		philo[i++].args = args;
 	}
 	return (philo);
